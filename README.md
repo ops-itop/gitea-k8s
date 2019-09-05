@@ -21,3 +21,21 @@ data:
 ```
 
 大于 2000 的端口可能会被占用，导致监听失败，所以使用 三位数 端口来转发到 git 2222 端口（使用git账号运行gitea，无权限监听三位数端口）
+
+## 初始化
+
+使用命令行添加管理员
+
+```bash
+/gitea --work-path /data --custom-path /data/custom --config /data/custom/conf/app.ini admin create-user --username admin --password admin19 --email=example@qq.com --admin
+```
+
+## 数据安全
+
+`pv` 回收策略改为 `Retain`
+
+```bash
+kubectl patch pv pvc-6782347e-cfa9-11e9-9dbf-e8631f143422 -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+```
+
+另外，计划使用脚本定时备份，上传到 minio
