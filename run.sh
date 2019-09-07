@@ -7,6 +7,9 @@ CONF=$GITEA_WORK_DIR/custom/conf
 
 [ ! -d $CONF ] && sudo mkdir -p $CONF
 
+# log 目录不存在时 dump 不成功
+[ ! -d $GITEA_WORK_DIR/log ] && mkdir -p $GITEA_WORK_DIR/log
+
 sudo cp -f $APP_CONFIG_PATH/CONFIG $CONF/app.ini
 
 sudo chown -R git:git /data

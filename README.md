@@ -5,6 +5,10 @@
 - GITEA_WORK_DIR  工作目录的绝对路径，默认为/data，需挂载volume到此路径
 - USER            Gitea 运行时使用的系统用户，它将作为一些 repository 的访问地址的一部分，默认使用 git
 - CONFIG          Gitea 主配置文件，将复制为 $GITEA_WORK_DIR/custom/conf/app.ini
+- CRON            备份计划任务
+- RETAIN          备份保留天数
+- NOTIFYAPI       邮件接口
+- TOS             邮件接收人
 
 
 
@@ -38,4 +42,17 @@ data:
 kubectl patch pv pvc-6782347e-cfa9-11e9-9dbf-e8631f143422 -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
 ```
 
-另外，计划使用脚本定时备份，上传到 minio
+### 使用脚本定时备份
+
+配置 CRON
+
+```yaml
+RETAIN: 30  # 保留天数
+CRON: |
+  0 2 * * * /dump.sh &>/tmp/gitea-dump.sh
+```
+
+### 上传到 minio 
+
+Todo
+
