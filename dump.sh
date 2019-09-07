@@ -10,13 +10,13 @@ CONFIG="$GITEA_WORK_DIR/custom/conf/app.ini"
 cd $GITEA_WORK_DIR
 /gitea dump --file $FILE --tempdir $TEMPDIR --config $CONFIG
 
-[ ! -d $BACKUP ] && mkdir -p $BACKUP
-mv $FILE $BACKUP
 
 CONTENT=`file $FILE`
-
 echo $CONTENT |grep "Zip archive data" && r=SUCC || r=FAILED
+CONTENT="$CONTENT\n`du -sh $FILE`"
 
+[ ! -d $BACKUP ] && mkdir -p $BACKUP
+mv $FILE $BACKUP
 
 # 删除过期备份
 # 备份默认保留30天
