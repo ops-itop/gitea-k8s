@@ -6,5 +6,6 @@ RUN adduser -D git
 RUN echo "git ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/git
 USER git
 ADD run.sh /
+ADD dump.sh /
 ENTRYPOINT ["/bin/sh", "/run.sh"]
 
