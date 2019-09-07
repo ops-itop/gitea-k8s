@@ -1,8 +1,5 @@
 #!/bin/bash
 
-su - git
-
-
 DATE=`date +%Y%m%d-%H%M%S`
 FILE="gitea-dump-$DATE.zip"
 TEMPDIR="/tmp"

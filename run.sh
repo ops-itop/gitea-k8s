@@ -17,9 +17,8 @@ sudo chown -R git:git /data
 export GITEA_WORK_DIR
 export USER
 
-[ -f $APP_CONFIG_PATH/CRON ] && sudo cp $APP_CONFIG_PATH/CRON /etc/crontabs/root
-
 sudo chmod +x /dump.sh
+# 使用 supercronic 来执行定时任务，支持以非root账户运行，并且可以直接用容器环境变量
+/supercronic $APP_CONFIG_PATH/CRON &
 
-sudo crond -l 0 -d 0
 exec /gitea web
