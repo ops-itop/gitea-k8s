@@ -14,4 +14,7 @@ sudo chown -R git:git /data
 export GITEA_WORK_DIR
 export USER
 
+[ -f $APP_CONFIG_PATH/CRON ] && sudo cp $APP_CONFIG_PATH/CRON /etc/crontabs/git && sudo chown git:git /etc/crontabs/git
+
+crond
 exec /gitea web
