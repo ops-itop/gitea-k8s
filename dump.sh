@@ -6,11 +6,11 @@ su - git
 DATE=`date +%Y%m%d-%H%M%S`
 FILE="gitea-dump-$DATE.zip"
 TEMPDIR="/tmp"
-CONFIG="/data/custom/conf/app.ini"
-DATA=/data
-BACKUP=$DATA/backups
+[ "$GITEA_WORK_DIR"x == ""x ] && GITEA_WORK_DIR=/data
+BACKUP=$GITEA_WORK_DIR/backups
+CONFIG="$GITEA_WORK_DIR/custom/conf/app.ini"
 
-cd $DATA
+cd $GITEA_WORK_DIR
 /gitea dump --file $FILE --tempdir $TEMPDIR --config $CONFIG
 
 [ ! -d $BACKUP ] && mkdir -p $BACKUP
