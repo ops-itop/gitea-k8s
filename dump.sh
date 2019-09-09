@@ -13,7 +13,7 @@ cd $GITEA_WORK_DIR
 
 CONTENT=`file $FILE`
 echo $CONTENT |grep "Zip archive data" && r=SUCC || r=FAILED
-CONTENT="$CONTENT\n`du -sh $FILE`"
+CONTENT="$CONTENT<br>`du -sh $FILE`"
 
 [ ! -d $BACKUP ] && mkdir -p $BACKUP
 mv $FILE $BACKUP
@@ -30,7 +30,7 @@ for f in ${FILE_DATE};do
 	if [ $f -lt $DELDAY ];then
 		del="gitea-dump-$f-*.zip"
 		msg="delete $del"
-		CONTENT="$CONTENT\n$msg"
+		CONTENT="$CONTENT<br>$msg"
 		echo $msg
 		rm -f $del
 	fi
@@ -41,7 +41,7 @@ function notify() {
 	# 使用邮件接口发送 https://github.com/ops-itop/mailer
 	[ "$NOTIFYAPI"x == ""x ] && NOTIFYAPI="http://127.0.0.1/api/mail"
 	[ "$TOS"x == ""x ] && echo "NEED param tos , exit ..." && exit 1
-	curl -s $NOTIFYAPI -XPOST -d "tos=$TOS&subject=[$1] Gitea Dump Result($DATE)&content=$2"
+	curl -s $NOTIFYAPI -XPOST -d "tos=$TOS&subject=[$1] Gitea Dump Result($DATE)&content=$2&format=html"
 }
 
 notify $r "$CONTENT"
