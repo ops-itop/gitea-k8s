@@ -1,5 +1,6 @@
 # Gitea on Kubernetes
 
+## 配置项
 需提供以下配置项
 
 - GITEA_WORK_DIR  工作目录的绝对路径，默认为/data，需挂载volume到此路径
@@ -11,7 +12,7 @@
 - TOS             邮件接收人
 
 
-
+## SSH代理
 通过 ingress nginx 代理 ssh
 
 ```yaml
@@ -47,12 +48,12 @@ kubectl patch pv pvc-6782347e-cfa9-11e9-9dbf-e8631f143422 -p '{"spec":{"persiste
 配置 CRON
 
 ```yaml
-RETAIN: 30  # 保留天数
+RETAIN: 30  # 本地备份保留天数
 CRON: |
   0 2 * * * /dump.sh &>/tmp/gitea-dump.sh
 ```
 
-### 上传到 minio 
+### 备份上传到 minio 
 
 Todo
 
