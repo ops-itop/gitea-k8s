@@ -29,10 +29,10 @@ data:
 
 ## 初始化
 
-使用命令行添加管理员
+使用命令行添加管理员, 用户名不能为 `admin`
 
 ```bash
-/gitea --work-path /data --custom-path /data/custom --config /data/custom/conf/app.ini admin create-user --username admin --password admin19 --email=example@qq.com --admin
+/gitea --work-path /data --custom-path /data/custom --config /data/custom/conf/app.ini admin create-user --username root --password admin19 --email=example@qq.com --admin
 ```
 
 ## 数据安全
